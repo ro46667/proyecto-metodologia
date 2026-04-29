@@ -1,0 +1,342 @@
+/* =========================================================
+   styles.css — Hoja de estilos unificada
+   Análisis Comparativo Tesla y BYD en Colombia 2026
+   ========================================================= */
+
+/* ── Variables globales ── */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --primary: #1a73e8;
+  --menu-dark: #111827;
+  --menu-dark-hover: #1f2937;
+}
+
+/* ── Reset base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────
+   FONDO GLOBAL — Bogota.jpg
+───────────────────────────────────────── */
+body {
+  margin: 0;
+  font-family: Arial, Roboto, "Segoe UI", sans-serif;
+  color: var(--text);
+  background-image: url("../images/Bogota.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  /* TAREA 6: footer pegado al fondo */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Overlay para legibilidad */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 246, 248, 0.82);
+  z-index: 0;
+  pointer-events: none;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────
+   HEADER
+───────────────────────────────────────── */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+nav {
+  background: var(--menu-dark);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0 14px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.menu > li {
+  position: relative;
+}
+
+.menu a {
+  display: block;
+  text-decoration: none;
+  color: #f9fafb;
+  padding: 11px 12px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+
+.menu > li > a:hover,
+.menu > li > button:hover {
+  background: var(--menu-dark-hover);
+}
+
+.menu > li > a.active-link {
+  background: #2563eb;
+}
+
+.menu button {
+  border: none;
+  background: transparent;
+  color: #f9fafb;
+  padding: 11px 12px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.menu button::after {
+  content: " ▾";
+  font-size: 0.8rem;
+}
+
+.submenu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: var(--menu-dark);
+  border: 1px solid #374151;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  z-index: 1200;
+}
+
+.submenu a {
+  padding: 10px 12px;
+  color: #e5e7eb;
+}
+
+.submenu a:hover {
+  background: var(--menu-dark-hover);
+  color: #ffffff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dropdown:hover > .submenu {
+    display: block;
+  }
+}
+
+.dropdown.active > .submenu {
+  display: block;
+}
+
+/* ─────────────────────────────────────────
+   MAIN / CONTENIDO
+   flex: 1 → empuja footer al fondo
+───────────────────────────────────────── */
+.container {
+  flex: 1;                  /* TAREA 6: main ocupa espacio restante */
+  max-width: 1080px;
+  width: 100%;
+  margin: 28px auto;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Sección estándar: imagen + texto (2 columnas) ── */
+.content-section {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 22px;
+  align-items: start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+/* Imagen real */
+.content-section img {
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Bloque imagen (contiene img + referencia) */
+.image-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.image-block img {
+  width: 100%;
+  min-height: 230px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Placeholder sin imagen real */
+.image-placeholder {
+  min-height: 230px;
+  border: 2px dashed #c7cdd6;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px;
+  font-weight: 600;
+}
+
+/* ── Referencia de imagen ── */
+.referencia {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 4px 0 0 0;
+  padding: 6px 8px;
+  background: #f8fafc;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 4px 4px 0;
+  word-break: break-all;
+}
+
+.referencia::before {
+  content: "🔗 Fuente: ";
+  font-style: normal;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ── Sección solo texto (objetivos, entrevistas) ── */
+.content-section--text-only {
+  grid-template-columns: 1fr;
+}
+
+.text-content--full {
+  width: 100%;
+}
+
+.titulo-centrado {
+  text-align: center;
+}
+
+/* ── Sección encuestas: texto + 2 imágenes en columna ── */
+.content-section--encuesta {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.encuesta-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Texto dentro de sección */
+.text-content h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+}
+
+.text-content p,
+.content-section p {
+  margin: 0;
+  line-height: 1.7;
+  color: #374151;
+}
+
+/* ─────────────────────────────────────────
+   FOOTER — siempre al fondo
+───────────────────────────────────────── */
+.site-footer {
+  margin-top: auto;
+  padding: 18px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer p {
+  display: inline;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVO
+───────────────────────────────────────── */
+@media (max-width: 860px) {
+  .content-section {
+    grid-template-columns: 1fr;
+  }
+
+  .encuesta-images {
+    grid-template-columns: 1fr;
+  }
+
+  .image-placeholder,
+  .content-section img,
+  .image-block img {
+    min-height: 190px;
+  }
+}
